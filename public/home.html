@@ -1,9 +1,7 @@
-<div class="jumbotron text-center">
-        <h1>Home Page</h1>
-
-        <p>{{ message }}</p>
-    </div>
-
 <div ng-repeat="place in places">
   {{place.name}}
+</div>
+
+<div style="padding:10px; font-weight:bold;" ng-show="showClickToSeeMore" ng-click="showMoreClicked()">
+  CLICK TO SEE MORE
 </div>
