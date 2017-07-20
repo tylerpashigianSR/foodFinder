@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+.navbar {
+  margin-bottom: 0px;
+}
+
 .fa-plus-square {
   color: #8cf442;
 }
@@ -25,16 +29,4 @@ a {
 
 .restaurants {
   padding-bottom: 2%;
-}
-
-.add {
-  height: 3%;
-  line-height: 3%;
-  text-align: center;
-}
-
-.i {
-  display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center;
 }
