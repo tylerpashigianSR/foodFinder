@@ -27,6 +27,10 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
            .success(function (response){
              console.log(response);
               $scope.places = response;
-           });
+       });
+
+       $scope.print = function() {
+         console.log("Hello, World!");
+       }
 
    });
