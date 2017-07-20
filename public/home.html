@@ -1,7 +1,27 @@
-<div ng-repeat="place in places">
-  {{place.name}}
+<div class="jumbotron text-center">
+  <h1>Home Page</h1>
+  <p>{{ message }}</p>
 </div>
 
+<form ng-submit="print()" class="ng-pristine ng-valid">
+    <div class="input-group col-md-6 col-md-offset-3">
+      <input type="text" placeholder="Search for a restaurant" class="form-control">
+      <span class="input-group-btn">
+        <button class="btn" type="submit">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </span>
+    </div>
+</form>
+
+<div class="col-md-6 col-md-offset-3">
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="place in places">
+      {{place.name}}
+    </li>
+  </ul>
+<div>
+  
 <div style="padding:10px; font-weight:bold;" ng-show="showClickToSeeMore" ng-click="showMoreClicked()">
   CLICK TO SEE MORE
 </div>
