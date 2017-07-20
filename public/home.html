@@ -12,9 +12,11 @@
         <input type="text" class="form-control" placeholder="email">
 
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="user in users">
-            {{user.restaurants.name}}
-            <i class="fa fa-minus-square pull-right test" aria-hidden="true"></i>
+          <li class="list-group-item" ng-repeat="restaurant in users.restaurants track by $index">
+            {{restaurant}}
+            <div class="add">
+              <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index)"></i>
+            </div>
           </li>
         </ul>
 
@@ -44,10 +46,10 @@
 
     <div style="max-height:500px; overflow-y:auto;">
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="place in places">
+        <li class="list-group-item" ng-repeat="place in places track by $index">
           <div style="font-size:120%;">{{place.name}}</div>
           <div>{{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}</div>
-          <i class="fa fa-plus-square pull-right test" aria-hidden="true"></i>
+            <i class="fa fa-plus-square" aria-hidden="true" ng-click="add(place.name)"></i>
         </li>
       </ul>
 

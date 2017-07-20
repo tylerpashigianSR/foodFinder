@@ -21,6 +21,9 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
    foodFinder.controller('mainController', function($scope, $http) {
        $scope.date = new Date();
        $scope.places = [];
+       $scope.users = {
+         restaurants: []
+       };
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
        $scope.max_price = 4;
@@ -71,6 +74,14 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
                   $scope.showClickToSeeMore = true;
                 }
              });
+       }
+
+       $scope.add = function(placeName) {
+         $scope.users.restaurants.push(placeName);
+       }
+
+       $scope.remove = function(index) {
+         $scope.users.restaurants.splice(index, 1);
        }
 
    });

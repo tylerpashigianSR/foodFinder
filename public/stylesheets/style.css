@@ -26,3 +26,15 @@ a {
 .restaurants {
   padding-bottom: 2%;
 }
+
+.add {
+  height: 3%;
+  line-height: 3%;
+  text-align: center;
+}
+
+.i {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+}
