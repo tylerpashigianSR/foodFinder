@@ -26,17 +26,8 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        };
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
-       $scope.max_price = 4;
+       $scope.max_price = 3;
        $scope.keyword = null;
-       $http.get("http://localhost:3000/places")
-           .success(function (response){
-              console.log(response);
-              $scope.places = response.firstTwentyResults;
-              next_page_token = response.next_page_token;
-              if(next_page_token != null){
-                $scope.showClickToSeeMore = true;
-              }
-           });
 
        $scope.searchWithParameters = function(){
          if($scope.keyword == null | $scope.keyword == ""){
@@ -83,5 +74,11 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.remove = function(index) {
          $scope.users.restaurants.splice(index, 1);
        }
+
+       init = function(){
+         $scope.searchWithParameters();
+       }
+
+       init();
 
    });
