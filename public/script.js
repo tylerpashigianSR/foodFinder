@@ -19,8 +19,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
 
    // create the controller and inject Angular's $scope
    foodFinder.controller('mainController', function($scope, $http) {
-       // create a message to display in our view
-       $scope.message = 'Everyone come and see how good I look!';
+       $scope.date = new Date();
        $scope.places = [];
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
@@ -36,6 +35,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
            });
 
        $scope.showMoreClicked = function(){
+         $scope.showClickToSeeMore = false;
          $http.get("http://localhost:3000/places/" + next_page_token)
              .success(function (response){
                 console.log(response);
@@ -43,8 +43,6 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
                 next_page_token = response.next_page_token;
                 if(next_page_token != null){
                   $scope.showClickToSeeMore = true;
-                } else{
-                  $scope.showClickToSeeMore = false;
                 }
              });
        }
