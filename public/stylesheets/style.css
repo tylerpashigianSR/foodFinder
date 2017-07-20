@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.fa-plus-square {
+  color: #8cf442;
+}
+
+.fa-plus-square:hover {
+  color: green;
+}
