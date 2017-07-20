@@ -23,7 +23,8 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.places = [];
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
-
+       $scope.max_price = 4;
+       $scope.keyword = null;
        $http.get("http://localhost:3000/places")
            .success(function (response){
               console.log(response);
@@ -34,9 +35,34 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
               }
            });
 
+       $scope.searchWithParameters = function(){
+         if($scope.keyword == null | $scope.keyword == ""){
+           $http.get("http://localhost:3000/places/" + $scope.max_price)
+               .success(function (response){
+                  console.log(response);
+                  $scope.places = response.firstTwentyResults;
+                  next_page_token = response.next_page_token;
+                  if(next_page_token != null){
+                    $scope.showClickToSeeMore = true;
+                  }
+               });
+         }
+         else{
+           $http.get("http://localhost:3000/places/" + $scope.keyword + "/" + $scope.max_price)
+               .success(function (response){
+                  console.log(response);
+                  $scope.places = response.firstTwentyResults;
+                  next_page_token = response.next_page_token;
+                  if(next_page_token != null){
+                    $scope.showClickToSeeMore = true;
+                  }
+               });
+           }
+       }
+
        $scope.showMoreClicked = function(){
          $scope.showClickToSeeMore = false;
-         $http.get("http://localhost:3000/places/" + next_page_token)
+         $http.get("http://localhost:3000/more_places/" + next_page_token)
              .success(function (response){
                 console.log(response);
                 $scope.places = $scope.places.concat(response.nextTwentyResults);
