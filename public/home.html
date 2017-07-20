@@ -25,9 +25,15 @@
 
   <div class="col-md-4">
     <h1>Restaurants</h1>
-    <form ng-submit="print()" class="ng-pristine ng-valid">
+    <!-- <button class="btn" ng-click="searchWithParameters('bar',1)">wdqw</button> -->
+    <form ng-submit="searchWithParameters()" class="ng-pristine ng-valid">
       <div class="input-group restaurants">
-        <input type="text" placeholder="Search for a restaurant" class="form-control">
+        <input type="text" ng-model="keyword" placeholder="Enter a keyword (ex. taco, burger)" class="form-control">
+        <span>Max Price: </span>
+        <label class="radio-inline"><input type="radio" value=1 name="optradio" ng-model="max_price">$</label>
+        <label class="radio-inline"><input type="radio" value=2 name="optradio" ng-model="max_price">$$</label>
+        <label class="radio-inline"><input type="radio" value=3 name="optradio" ng-model="max_price">$$$</label>
+        <label class="radio-inline"><input type="radio" value=4 name="optradio" ng-model="max_price">$$$$</label>
         <span class="input-group-btn">
           <button class="btn" type="submit">
             <i class="fa fa-search" aria-hidden="true"></i>
@@ -49,8 +55,8 @@
         </li>
       </ul>
 
-      <div style="padding:10px; font-weight:bold;" ng-show="showClickToSeeMore" ng-click="showMoreClicked()">
-        <button class="btn">Load More</button>
+      <div ng-show="showClickToSeeMore" ng-click="showMoreClicked()">
+        <button class="btn">Show More</button>
       </div>
 
     </div>
