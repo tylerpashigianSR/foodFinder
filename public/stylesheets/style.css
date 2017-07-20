@@ -1,7 +1,7 @@
-body {
+/*body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+}*/
 
 a {
   color: #00B7FF;
@@ -13,4 +13,16 @@ a {
 
 .fa-plus-square:hover {
   color: green;
+}
+
+.fa-minus-square {
+  color: red;
+}
+
+.fa-minus-square:hover {
+  color: #c42921;
+}
+
+.restaurants {
+  padding-bottom: 2%;
 }

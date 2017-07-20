@@ -3,30 +3,53 @@
   {{date | date : fulldate}}
 </div>
 
-<div>
-  <form ng-submit="print()" class="ng-pristine ng-valid">
-    <div class="input-group col-md-6 col-md-offset-3">
-      <input type="text" placeholder="Search for a restaurant" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn" type="submit">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </button>
-      </span>
-    </div>
-  </form>
-<div>
+<div class="row">
 
-<div class="col-md-6 col-md-offset-3">
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="place in places">
-      <div style="font-size:120%;">{{place.name}}</div>
-      <div>{{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}</div>
-      <i class="fa fa-plus-square pull-right test" aria-hidden="true"></i>
-    </li>
+  <div class="col-md-4 col-md-offset-2">
+    <h1>User Info</h1>
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Name">
+        <input type="text" class="form-control" placeholder="email">
 
-  </ul>
-<div>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="user in users">
+            {{user.restaurants.name}}
+            <i class="fa fa-minus-square pull-right test" aria-hidden="true"></i>
+          </li>
+        </ul>
 
-<div style="padding:10px; font-weight:bold;" ng-show="showClickToSeeMore" ng-click="showMoreClicked()">
-  <button class="btn">CLICK TO SEE MORE</button>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-md-4">
+    <h1>Restaurants</h1>
+    <form ng-submit="print()" class="ng-pristine ng-valid">
+      <div class="input-group restaurants">
+        <input type="text" placeholder="Search for a restaurant" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn" type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  <div>
+
+  <div class="">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="place in places">
+        <div style="font-size:120%;">{{place.name}}</div>
+        <div>{{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}</div>
+        <i class="fa fa-plus-square pull-right test" aria-hidden="true"></i>
+      </li>
+    </ul>
+  </div>
+
+  <div style="padding:10px; font-weight:bold;" ng-show="showClickToSeeMore" ng-click="showMoreClicked()">
+    <button class="btn">CLICK TO SEE MORE</button>
+  </div>
+
 </div>
