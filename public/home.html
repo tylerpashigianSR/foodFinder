@@ -53,20 +53,12 @@
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="place in places track by $index">
           <div style="font-size:120%;">
-<<<<<<< HEAD
             {{place.name}}
           </div>
           <div>
             {{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}
           </div>
           <i class="fa fa-plus-square i pull-right" aria-hidden="true" ng-click="add($index, place)"></i>
-=======
-            <i class="fa fa-plus-square" aria-hidden="true" ng-click="add(place.name)"></i>
-             {{place.name}}
-           </div>
-          <div>{{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}</div>
-
->>>>>>> a0c030147733b07264338386a86620c7a828f2d3
         </li>
       </ul>
 
