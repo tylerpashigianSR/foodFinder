@@ -32,6 +32,10 @@ router.get('/more_places/:next_page_token', function(req,res){
     });
 });
 
+router.post('/submit_places', function(req,res){
+    console.log(req.body.place_ids);
+});
+
 function processResults(body){
     var results = JSON.parse(body).results;
     for(var i = 0; i < results.length; i++){

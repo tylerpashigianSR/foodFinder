@@ -69,6 +69,18 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
              });
        }
 
+       $scope.submitPlaces = function(){
+         var place_ids = [];
+         for(var i = 0; i < $scope.users.restaurants.length; i++){
+           place_ids.push($scope.users.restaurants[i].id);
+         }
+         var data = {place_ids : place_ids};
+         $http.post("http://localhost:3000/submit_places/", data)
+             .success(function (response){
+                console.log(response);
+             });
+       }
+
        $scope.add = function(index, place) {
          $scope.places[index].counter += 1;
          $scope.users.restaurants.push(place);
