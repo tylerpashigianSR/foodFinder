@@ -13,8 +13,8 @@
 
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="restaurant in users.restaurants track by $index">
-            {{restaurant}}
-            <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index)"></i>
+            {{restaurant.name}}
+            <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index, restaurant)"></i>
           </li>
         </ul>
 
@@ -51,7 +51,7 @@
           <div>
             {{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}
           </div>
-          <i class="fa fa-plus-square i pull-right" aria-hidden="true" ng-click="add(place.name)"></i>
+          <i class="fa fa-plus-square i pull-right" aria-hidden="true" ng-click="add($index, place)"></i>
         </li>
       </ul>
 

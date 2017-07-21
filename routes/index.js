@@ -32,9 +32,10 @@ router.get('/places', function(req,res){
    function(error, response, body) {
      var firstTwentyResults = JSON.parse(body).results;
      for(var i = 0; i < firstTwentyResults.length; i++){
-       firstTwentyResults[i].distanceFromOffice = distance(41.8885,-87.6354,
-            firstTwentyResults[i].geometry.location.lat,firstTwentyResults[i].geometry.location.lng);
-       firstTwentyResults[i].dollarSigns = priceLevelToDollarSigns(firstTwentyResults[i].price_level);
+         firstTwentyResults[i].distanceFromOffice = distance(41.8885,-87.6354,
+         firstTwentyResults[i].geometry.location.lat,firstTwentyResults[i].geometry.location.lng);
+         firstTwentyResults[i].dollarSigns = priceLevelToDollarSigns(firstTwentyResults[i].price_level);
+         firstTwentyResults[i].counter = 0;
      }
      var next_page_token = JSON.parse(body).next_page_token;
      res.send({firstTwentyResults : firstTwentyResults, next_page_token : next_page_token});

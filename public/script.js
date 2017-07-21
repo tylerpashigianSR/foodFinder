@@ -24,6 +24,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.users = {
          restaurants: []
        };
+
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
        $scope.max_price = 4;
@@ -76,12 +77,18 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
              });
        }
 
-       $scope.add = function(placeName) {
-         $scope.users.restaurants.push(placeName);
+       $scope.add = function(index, place) {
+         $scope.places[index].counter += 1;
+         $scope.users.restaurants.push(place);
+         $scope.places.splice(index, 1);
+         console.log($scope.users.restaurants);
        }
 
-       $scope.remove = function(index) {
+       $scope.remove = function(index, place) {
+         $scope.users.restaurants[index].counter -= 1;
+         $scope.places.splice($scope.users.index, 0, place);
          $scope.users.restaurants.splice(index, 1);
+         console.log($scope.places[0].counter);
        }
 
    });
