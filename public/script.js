@@ -22,7 +22,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.date = new Date();
        $scope.places = [];
        $scope.users = {
-         restaurants: []
+         restaurants : []
        };
 
        var next_page_token = "";
@@ -30,37 +30,38 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.max_price = 3;
        $scope.keyword = null;
 
-       $scope.searchWithParameters = function(){
-         if($scope.keyword == null | $scope.keyword == ""){
-           $http.get("http://localhost:3000/places/" + $scope.max_price)
-               .success(function (response){
-                  console.log(response);
-                  $scope.places = response.firstTwentyResults;
-                  next_page_token = response.next_page_token;
-                  if(next_page_token != null){
-                    $scope.showClickToSeeMore = true;
-                  }
-               });
+       $scope.searchForPlaces = function(showMoreClicked){
+         $scope.showClickToSeeMore = false;
+         var url = "";
+         if(showMoreClicked == true){
+           url = "http://localhost:3000/more_places/" + next_page_token;
          }
          else{
-           $http.get("http://localhost:3000/places/" + $scope.keyword + "/" + $scope.max_price)
-               .success(function (response){
-                  console.log(response);
-                  $scope.places = response.firstTwentyResults;
-                  next_page_token = response.next_page_token;
-                  if(next_page_token != null){
-                    $scope.showClickToSeeMore = true;
-                  }
-               });
+           $scope.places = [];
+           if($scope.keyword == null | $scope.keyword == ""){
+             url = "http://localhost:3000/places/" + $scope.max_price;
            }
-       }
-
-       $scope.showMoreClicked = function(){
-         $scope.showClickToSeeMore = false;
-         $http.get("http://localhost:3000/more_places/" + next_page_token)
+           else{
+             url = "http://localhost:3000/places/" + $scope.keyword + "/" + $scope.max_price;
+           }
+         }
+         $http.get(url)
              .success(function (response){
                 console.log(response);
-                $scope.places = $scope.places.concat(response.nextTwentyResults);
+
+                //check to see if the user has selected any of these places already
+                for(var i = 0; i < response.firstTwentyResults.length; i++){
+                  var placeAlreadySelected = false;
+                  for(var j = 0; j < $scope.users.restaurants.length; j++ ){
+                    if($scope.users.restaurants[j].name == response.firstTwentyResults[i].name){
+                      placeAlreadySelected = true;
+                      break;
+                    }
+                  }
+                  if(!placeAlreadySelected){
+                    $scope.places.push(response.firstTwentyResults[i]);
+                  }
+                }
                 next_page_token = response.next_page_token;
                 if(next_page_token != null){
                   $scope.showClickToSeeMore = true;
@@ -83,7 +84,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        }
 
        init = function(){
-         $scope.searchWithParameters();
+         $scope.searchForPlaces(false);
        }
 
        init();
