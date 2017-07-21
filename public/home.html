@@ -1,5 +1,5 @@
-<div style="text-align:center">
-  <h5>{{date | date : 'fullDate'}}</h5>
+<div class="jumbotron text-center">
+  <h3>{{date | date : fulldate}}</h3>
 </div>
 
 <div class="row">
@@ -13,20 +13,13 @@
 
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="restaurant in users.restaurants track by $index">
-<<<<<<< HEAD
             {{restaurant.name}}
             <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index, restaurant)"></i>
-=======
-            {{restaurant}}
-            <div class="add">
-              <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index)"></i>
-            </div>
->>>>>>> a0c030147733b07264338386a86620c7a828f2d3
           </li>
         </ul>
 
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default">Find Friends</button>
     </form>
   </div>
 
@@ -35,7 +28,7 @@
     <!-- <button class="btn" ng-click="searchWithParameters('bar',1)">wdqw</button> -->
     <form ng-submit="searchWithParameters()" class="ng-pristine ng-valid">
       <div class="input-group restaurants">
-        <input type="text" ng-model="keyword" placeholder="Enter a keyword (ex. taco) for more results" class="form-control">
+        <input type="text" ng-model="keyword" placeholder="Enter a keyword (ex. taco, burger)" class="form-control">
         <span>Max Price: </span>
         <label class="radio-inline"><input type="radio" value=1 name="optradio" ng-model="max_price">$</label>
         <label class="radio-inline"><input type="radio" value=2 name="optradio" ng-model="max_price">$$</label>
