@@ -50,16 +50,16 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
                 console.log(response);
 
                 //check to see if the user has selected any of these places already
-                for(var i = 0; i < response.firstTwentyResults.length; i++){
+                for(var i = 0; i < response.results.length; i++){
                   var placeAlreadySelected = false;
                   for(var j = 0; j < $scope.users.restaurants.length; j++ ){
-                    if($scope.users.restaurants[j].name == response.firstTwentyResults[i].name){
+                    if($scope.users.restaurants[j].name == response.results[i].name){
                       placeAlreadySelected = true;
                       break;
                     }
                   }
                   if(!placeAlreadySelected){
-                    $scope.places.push(response.firstTwentyResults[i]);
+                    $scope.places.push(response.results[i]);
                   }
                 }
                 next_page_token = response.next_page_token;
