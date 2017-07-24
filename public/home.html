@@ -47,6 +47,12 @@
           </div>
           <div>
             {{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}
+            <span ng-if="place.counter == 1;">
+              |  {{place.counter}} wants to eat here
+            </span>
+            <span ng-if="place.counter > 1;">
+              |  {{place.counter}} want to eat here
+            </span>
           </div>
         </li>
       </ul>

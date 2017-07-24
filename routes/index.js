@@ -56,7 +56,12 @@ function processResults(body){
     for(var i = 0; i < results.length; i++){
        results[i].distanceFromOffice = distance(41.8885,-87.6354,results[i].geometry.location.lat,results[i].geometry.location.lng);
        results[i].dollarSigns = priceLevelToDollarSigns(results[i].price_level);
-       results[i].counter = 0;
+       if(restaurantCounter[results[i].id] == null){
+          results[i].counter = 0;
+       }
+       else{
+          results[i].counter = restaurantCounter[results[i].id];
+       }
     }
     return results;
 }
