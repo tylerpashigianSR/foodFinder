@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 
+var restaurantCounter = [];
+
 router.get('/places/:max_price', function(req,res){
   request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.8885,-87.6354&rankby=distance&type=restaurant&opennow=true&maxprice=" +
             req.params.max_price + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ",
@@ -32,8 +34,21 @@ router.get('/more_places/:next_page_token', function(req,res){
     });
 });
 
-router.post('/submit_places', function(req,res){
-    console.log(req.body.place_ids);
+router.get('/updateCounter/:id', function(req, res) {
+
+  // console.log(req.params);
+
+  if (restaurantCounter[req.params.id] == null) {
+    console.log("Null");
+    restaurantCounter[req.params.id] = 1;
+  } else {
+    restaurantCounter[req.params.id] += 1;
+    console.log("Add");
+  }
+
+  console.log(restaurantCounter);
+  res.send(restaurantCounter);
+
 });
 
 function processResults(body){
