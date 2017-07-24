@@ -34,7 +34,7 @@ router.get('/more_places/:next_page_token', function(req,res){
     });
 });
 
-router.get('/updateCounter/:id', function(req, res) {
+router.get('/increaseCounter/:id', function(req, res) {
 
   // console.log(req.params);
 
@@ -45,6 +45,17 @@ router.get('/updateCounter/:id', function(req, res) {
     restaurantCounter[req.params.id] += 1;
     console.log("Add");
   }
+
+  console.log(restaurantCounter);
+  res.send(restaurantCounter);
+
+});
+
+router.get('/decreaseCounter/:id', function(req, res) {
+
+  console.log(req.params);
+  restaurantCounter[req.params.id] -= 1;
+  console.log("Remove");
 
   console.log(restaurantCounter);
   res.send(restaurantCounter);
