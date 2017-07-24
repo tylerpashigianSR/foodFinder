@@ -21,6 +21,8 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
    foodFinder.controller('mainController', function($scope, $http) {
        $scope.date = new Date();
        $scope.places = [];
+       $scope.emailLockedIn = false;
+       $scope.email = "";
        $scope.users = {
          restaurants : []
        };

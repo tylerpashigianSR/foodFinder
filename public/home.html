@@ -1,26 +1,19 @@
-<div class="row">
+<div class="jumbotron text-center">
+  <h3>Your contact email:</h3>
+  <form ng-submit="emailLockedIn = !emailLockedIn;" ng-show="!emailLockedIn">
+    <input type="text" placeholder="Enter your e-mail" ng-model="email">
+    <button class="btn" type="submit">Confirm</button>
+  </form>
+  <form ng-submit="emailLockedIn = !emailLockedIn;" ng-show="emailLockedIn">
+    {{email}}
+    <button class="btn" type="submit">Edit e-mail</button>
+  </form>
+</div>
 
+
+<div class="row" ng-show="emailLockedIn">
   <div class="col-md-4 col-md-offset-2">
-    <h1>User Info</h1>
-    <form>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Name">
-        <input type="text" class="form-control" placeholder="email">
-
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="restaurant in users.restaurants track by $index">
-            {{restaurant.name}}
-            <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index, restaurant)"></i>
-          </li>
-        </ul>
-
-      </div>
-    </form>
-  </div>
-
-  <div class="col-md-4">
-    <h1>Restaurants</h1>
-    <!-- <button class="btn" ng-click="searchWithParameters('bar',1)">wdqw</button> -->
+    <h2>Search Restaurants</h2>
     <form ng-submit="searchForPlaces(false)" class="ng-pristine ng-valid">
       <div class="input-group restaurants">
         <input type="text" ng-model="keyword" placeholder="Enter a keyword (ex. taco, burger)" class="form-control">
@@ -45,12 +38,17 @@
             {{place.name}}
           </div>
           <div>
-            {{place.distanceFromOffice | number : 2}} mi  |  {{place.dollarSigns}}
-            <span ng-if="place.counter == 1;">
-              |  {{place.counter}} wants to eat here
+            <span>{{place.distanceFromOffice | number : 2}} mi  |
             </span>
-            <span ng-if="place.counter > 1;">
-              |  {{place.counter}} want to eat here
+            <span style="font-weight:bold;"> {{place.dollarSigns}}
+            </span>
+            <span ng-if="place.counter > 0;">  |
+            </span>
+            <span ng-if="place.counter == 1;" style="color:red;">
+                {{place.counter}} wants to eat here
+            </span>
+            <span ng-if="place.counter > 1;" style="color:red;">
+                {{place.counter}} want to eat here
             </span>
           </div>
         </li>
@@ -61,6 +59,16 @@
       </div>
 
     </div>
+  </div>
+
+  <div class="col-md-4">
+    <h2>My Picks</h2>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="restaurant in users.restaurants track by $index">
+        {{restaurant.name}}
+        <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index, restaurant)"></i>
+      </li>
+    </ul>
   </div>
 
 </div>
