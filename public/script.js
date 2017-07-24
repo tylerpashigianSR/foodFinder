@@ -71,9 +71,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
 
        $scope.add = function(index, place) {
 
-         console.log(place.id);
-
-         $http.get('/updateCounter/' + place.id)
+         $http.get('/increaseCounter/' + place.id)
              .success(function (response){
                 console.log("Success");
              });
@@ -85,6 +83,12 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        }
 
        $scope.remove = function(index, place) {
+
+       $http.get('/decreaseCounter/' + place.id)
+           .success(function (response){
+              console.log("Success");
+           });
+
          $scope.users.restaurants[index].counter -= 1;
          $scope.places.splice($scope.users.index, 0, place);
          $scope.users.restaurants.splice(index, 1);
