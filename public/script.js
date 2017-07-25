@@ -27,6 +27,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.showClickToSeeMore = false;
        $scope.max_price = 3;
        $scope.keyword = null;
+       $scope.validated = false;
 
        $scope.submitEmail = function(){
          if($scope.email != ""){
@@ -36,6 +37,10 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
           init();
          }
        }
+
+       $scope.$watch(function() { return $scope.email; }, function (newVal, oldVal) {
+         
+       });
 
        $scope.searchForPlaces = function(showMoreClicked){
          $scope.showClickToSeeMore = false;

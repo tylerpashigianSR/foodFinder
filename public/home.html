@@ -1,9 +1,13 @@
 <div class="jumbotron text-center">
   <h3>Your contact email:</h3>
-  <form ng-submit="submitEmail();" ng-show="!emailLockedIn">
-    <input type="text" placeholder="Enter your e-mail" ng-model="email">
-    <button class="btn" type="submit">Confirm</button>
-  </form>
+
+  <div class="row">
+    <form ng-submit="submitEmail();" ng-show="!emailLockedIn" name="myForm" class="col-md-3 col-md-offset-4">
+      <input type="email" class="email form-control" placeholder="Enter your e-mail" name="input" ng-model="email">
+      <button class="btn" type="submit" ng-disabled="myForm.$invalid || !email.length">Confirm</button>
+    </form>
+  </div>
+
   <form ng-submit="submitEmail();" ng-show="emailLockedIn">
     {{email}}
     <button class="btn" type="submit">Edit e-mail</button>
