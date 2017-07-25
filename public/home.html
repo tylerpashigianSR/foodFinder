@@ -34,7 +34,8 @@
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="place in places track by $index">
           <div style="font-size:120%;">
-            <i class="fa fa-plus-square i" aria-hidden="true" ng-click="add($index, place)"></i>
+            <i class="fa fa-plus-square i" aria-hidden="true" ng-click="add($index, place)" ng-show="!place.chosen"></i>
+            <i class="fa fa-minus-square i" aria-hidden="true" ng-click="remove($index, place)" ng-show="place.chosen"></i>
             {{place.name}}
           </div>
           <div>
@@ -59,16 +60,6 @@
       </div>
 
     </div>
-  </div>
-
-  <div class="col-md-4">
-    <h2>My Picks</h2>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="restaurant in chosenRestaurants track by $index">
-        {{restaurant.name}}
-        <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index, restaurant)"></i>
-      </li>
-    </ul>
   </div>
 
 </div>
