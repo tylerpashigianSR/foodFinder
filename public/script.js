@@ -65,6 +65,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.add = function(index, place) {
          $http.get('/increaseCounter/' + place.id + '/' + $scope.email)
              .success(function (response){
+               place.counter++;
                place.chosen = true;
              });
        }
@@ -72,6 +73,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.remove = function(index, place) {
          $http.get('/decreaseCounter/' + place.id + '/' + $scope.email)
              .success(function (response){
+               place.counter--;
                place.chosen = false;
              });
        }
