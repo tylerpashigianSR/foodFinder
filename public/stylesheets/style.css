@@ -27,6 +27,14 @@ a {
   color: #c42921;
 }
 
+.input-group-btn {
+  vertical-align: text-top;
+}
+
+.searchBtn {
+  height: 34px;
+}
+
 .restaurants {
   padding-bottom: 2%;
 }
