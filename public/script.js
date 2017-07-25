@@ -24,7 +24,8 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.emailLockedIn = false;
        $scope.email = "";
        $scope.chosenRestaurants = [];
-
+       $scope.validated=false;
+      //  $scope.validator = require("email-validator");
        $scope.submitEmail = function(){
          if($scope.email != ""){
            $scope.emailLockedIn = !$scope.emailLockedIn;
@@ -36,6 +37,13 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
                });
          }
        }
+
+      //  $scope.$watch(function() { return $scope.email; }, function (newVal, oldVal) {
+      //       if (validator.validate(newVal)) {
+      //          //do whatever
+      //          console.log("Gravy")
+      //       }
+      //   });
 
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
