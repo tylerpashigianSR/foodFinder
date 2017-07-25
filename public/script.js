@@ -23,65 +23,38 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.places = [];
        $scope.emailLockedIn = false;
        $scope.email = "";
-       $scope.chosenRestaurants = [];
-       $scope.validated=false;
-      //  $scope.validator = require("email-validator");
-       $scope.submitEmail = function(){
-         if($scope.email != ""){
-           $scope.emailLockedIn = !$scope.emailLockedIn;
-         }
-         if($scope.emailLockedIn){
-           $http.get('/getPlacesForEmail/' + $scope.email)
-               .success(function (response){
-                  //console.log("Success");
-               });
-         }
-       }
-
-      //  $scope.$watch(function() { return $scope.email; }, function (newVal, oldVal) {
-      //       if (validator.validate(newVal)) {
-      //          //do whatever
-      //          console.log("Gravy")
-      //       }
-      //   });
-
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
        $scope.max_price = 3;
        $scope.keyword = null;
 
+       $scope.submitEmail = function(){
+         if($scope.email != ""){
+           $scope.emailLockedIn = !$scope.emailLockedIn;
+         }
+         if($scope.emailLockedIn){
+          init();
+         }
+       }
+
        $scope.searchForPlaces = function(showMoreClicked){
          $scope.showClickToSeeMore = false;
          var url = "";
          if(showMoreClicked == true){
-           url = "http://localhost:3000/morePlaces/" + next_page_token;
+           url = "http://localhost:3000/morePlaces/" + next_page_token + "/" + $scope.email;
          }
          else{
            $scope.places = [];
            if($scope.keyword == null | $scope.keyword == ""){
-             url = "http://localhost:3000/places/" + $scope.max_price;
+             url = "http://localhost:3000/places/" + $scope.max_price + "/" + $scope.email;
            }
            else{
-             url = "http://localhost:3000/places/" + $scope.keyword + "/" + $scope.max_price;
+             url = "http://localhost:3000/places/" + $scope.keyword + "/" + $scope.max_price + "/" + $scope.email;
            }
          }
          $http.get(url)
              .success(function (response){
-                //console.log(response);
-
-                //check to see if the user has selected any of these places already
-                for(var i = 0; i < response.results.length; i++){
-                  var placeAlreadySelected = false;
-                  for(var j = 0; j < $scope.chosenRestaurants.length; j++ ){
-                    if($scope.chosenRestaurants[j].name == response.results[i].name){
-                      placeAlreadySelected = true;
-                      break;
-                    }
-                  }
-                  if(!placeAlreadySelected){
-                    $scope.places.push(response.results[i]);
-                  }
-                }
+                $scope.places = response.results;
                 next_page_token = response.next_page_token;
                 if(next_page_token != null){
                   $scope.showClickToSeeMore = true;
@@ -92,25 +65,21 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.add = function(index, place) {
          $http.get('/increaseCounter/' + place.id + '/' + $scope.email)
              .success(function (response){
-                //console.log("Success");
+               place.counter++;
+               place.chosen = true;
              });
-         $scope.chosenRestaurants.push(place);
-         $scope.places.splice(index, 1);
        }
 
        $scope.remove = function(index, place) {
          $http.get('/decreaseCounter/' + place.id + '/' + $scope.email)
              .success(function (response){
-                console.log("Success");
+               place.counter--;
+               place.chosen = false;
              });
-           $scope.places.splice(0, 0, place);
-           $scope.chosenRestaurants.splice(index, 1);
        }
 
        init = function(){
          $scope.searchForPlaces(false);
        }
-
-       init();
 
    });
