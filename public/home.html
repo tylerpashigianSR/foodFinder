@@ -1,10 +1,10 @@
 <div class="jumbotron text-center">
   <h3>Your contact email:</h3>
-  <form ng-submit="emailLockedIn = !emailLockedIn;" ng-show="!emailLockedIn">
+  <form ng-submit="submitEmail();" ng-show="!emailLockedIn">
     <input type="text" placeholder="Enter your e-mail" ng-model="email">
     <button class="btn" type="submit">Confirm</button>
   </form>
-  <form ng-submit="emailLockedIn = !emailLockedIn;" ng-show="emailLockedIn">
+  <form ng-submit="submitEmail();" ng-show="emailLockedIn">
     {{email}}
     <button class="btn" type="submit">Edit e-mail</button>
   </form>
@@ -64,7 +64,7 @@
   <div class="col-md-4">
     <h2>My Picks</h2>
     <ul class="list-group">
-      <li class="list-group-item" ng-repeat="restaurant in users.restaurants track by $index">
+      <li class="list-group-item" ng-repeat="restaurant in chosenRestaurants track by $index">
         {{restaurant.name}}
         <i class="fa fa-minus-square pull-right i" aria-hidden="true" ng-click="remove($index, restaurant)"></i>
       </li>

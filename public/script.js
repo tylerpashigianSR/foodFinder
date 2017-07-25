@@ -23,9 +23,19 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        $scope.places = [];
        $scope.emailLockedIn = false;
        $scope.email = "";
-       $scope.users = {
-         restaurants : []
-       };
+       $scope.chosenRestaurants = [];
+
+       $scope.submitEmail = function(){
+         if($scope.email != ""){
+           $scope.emailLockedIn = !$scope.emailLockedIn;
+         }
+         if($scope.emailLockedIn){
+           $http.get('/getPlacesForEmail/' + $scope.email)
+               .success(function (response){
+                  //console.log("Success");
+               });
+         }
+       }
 
        var next_page_token = "";
        $scope.showClickToSeeMore = false;
@@ -36,7 +46,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
          $scope.showClickToSeeMore = false;
          var url = "";
          if(showMoreClicked == true){
-           url = "http://localhost:3000/more_places/" + next_page_token;
+           url = "http://localhost:3000/morePlaces/" + next_page_token;
          }
          else{
            $scope.places = [];
@@ -49,13 +59,13 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
          }
          $http.get(url)
              .success(function (response){
-                console.log(response);
+                //console.log(response);
 
                 //check to see if the user has selected any of these places already
                 for(var i = 0; i < response.results.length; i++){
                   var placeAlreadySelected = false;
-                  for(var j = 0; j < $scope.users.restaurants.length; j++ ){
-                    if($scope.users.restaurants[j].name == response.results[i].name){
+                  for(var j = 0; j < $scope.chosenRestaurants.length; j++ ){
+                    if($scope.chosenRestaurants[j].name == response.results[i].name){
                       placeAlreadySelected = true;
                       break;
                     }
@@ -72,29 +82,21 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        }
 
        $scope.add = function(index, place) {
-
-         $http.get('/increaseCounter/' + place.id)
+         $http.get('/increaseCounter/' + place.id + '/' + $scope.email)
              .success(function (response){
-                console.log("Success");
+                //console.log("Success");
              });
-
-         $scope.places[index].counter += 1;
-         $scope.users.restaurants.push(place);
+         $scope.chosenRestaurants.push(place);
          $scope.places.splice(index, 1);
-         console.log($scope.users.restaurants);
        }
 
        $scope.remove = function(index, place) {
-
-       $http.get('/decreaseCounter/' + place.id)
-           .success(function (response){
-              console.log("Success");
-           });
-
-         $scope.users.restaurants[index].counter -= 1;
-         $scope.places.splice($scope.users.index, 0, place);
-         $scope.users.restaurants.splice(index, 1);
-         console.log($scope.places[0].counter);
+         $http.get('/decreaseCounter/' + place.id + '/' + $scope.email)
+             .success(function (response){
+                console.log("Success");
+             });
+           $scope.places.splice(0, 0, place);
+           $scope.chosenRestaurants.splice(index, 1);
        }
 
        init = function(){

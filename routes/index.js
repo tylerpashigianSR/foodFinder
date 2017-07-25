@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 
-var restaurantCounter = [];
+var chosenRestaurants = {};
 
 router.get('/places/:max_price', function(req,res){
   request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.8885,-87.6354&rankby=distance&type=restaurant&opennow=true&maxprice=" +
@@ -24,7 +24,7 @@ router.get('/places/:keyword/:max_price', function(req,res){
   });
 });
 
-router.get('/more_places/:next_page_token', function(req,res){
+router.get('/morePlaces/:next_page_token', function(req,res){
     var next_page_token = req.params.next_page_token;
     request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=" + next_page_token + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ",
      function(error, response, body) {
@@ -34,31 +34,35 @@ router.get('/more_places/:next_page_token', function(req,res){
     });
 });
 
-router.get('/increaseCounter/:id', function(req, res) {
-
-  // console.log(req.params);
-
-  if (restaurantCounter[req.params.id] == null) {
-    console.log("Null");
-    restaurantCounter[req.params.id] = 1;
-  } else {
-    restaurantCounter[req.params.id] += 1;
-    console.log("Add");
+router.get('/getPlacesForEmail/:email', function(req, res) {
+  var placesForEmail = [];
+  for (var key in chosenRestaurants) {
+    var index = chosenRestaurants[key].indexOf(req.params.email);
+    if(index >= 0){
+      placesForEmail.push(key);
+    }
   }
-
-  console.log(restaurantCounter);
-  res.send(restaurantCounter);
-
+  res.send(placesForEmail);
 });
 
-router.get('/decreaseCounter/:id', function(req, res) {
+router.get('/increaseCounter/:id/:email', function(req, res) {
+  if (chosenRestaurants[req.params.id] == null) {
+    chosenRestaurants[req.params.id] = [req.params.email];
+  } else {
+    chosenRestaurants[req.params.id].push(req.params.email);
+  }
+  console.log(chosenRestaurants);
+  res.send("all good");
+});
 
-  console.log(req.params);
-  restaurantCounter[req.params.id] -= 1;
-  console.log("Remove");
+router.get('/decreaseCounter/:id/:email', function(req, res) {
 
-  console.log(restaurantCounter);
-  res.send(restaurantCounter);
+  if (chosenRestaurants[req.params.id] != null) {
+    var index = chosenRestaurants[req.params.id].indexOf(req.params.email);
+    if(index >= 0){chosenRestaurants[req.params.id].splice(index, 1);}
+  }
+  console.log(chosenRestaurants);
+  res.send("removed. all good");
 
 });
 
@@ -67,11 +71,11 @@ function processResults(body){
     for(var i = 0; i < results.length; i++){
        results[i].distanceFromOffice = distance(41.8885,-87.6354,results[i].geometry.location.lat,results[i].geometry.location.lng);
        results[i].dollarSigns = priceLevelToDollarSigns(results[i].price_level);
-       if(restaurantCounter[results[i].id] == null){
+       if(chosenRestaurants[results[i].id] == null){
           results[i].counter = 0;
        }
        else{
-          results[i].counter = restaurantCounter[results[i].id];
+          results[i].counter = chosenRestaurants[results[i].id].length;
        }
     }
     return results;
