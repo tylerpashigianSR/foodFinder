@@ -58,12 +58,8 @@ a {
   border: none;
 }
 
-.navbar-default .navbar-nav>li>a {
-    color: #ffffff;
-}
-
 .navbar-default .navbar-brand {
-    color: #ffffff;
+    color: #323232;
 }
 
 .emailHeader{
@@ -71,19 +67,11 @@ a {
   margin-top:0px;
   padding-top:115px;
   padding-bottom:15px;
-<<<<<<< HEAD
-  /*background-color: #dd2c00;*/
-  color:white;
-=======
-  background-color: #dd2c00;
-  color:#ffffff;
->>>>>>> 24b867a2c5f32238bde86baa4a3ccf4ae1154a3e
 }
 
 .displayArea{
   position: relative;
   margin-bottom:50px;
-
 }
 
 .emailGood:focus, .uneditable-input:focus {
