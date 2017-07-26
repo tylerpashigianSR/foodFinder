@@ -35,6 +35,11 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
          }
          if($scope.emailLockedIn){
           init();
+          $(document).ready(function () {
+              $("html, body").animate({
+                  scrollTop: $("#search").offset().top
+              }, 1500);
+          });
          }
        }
 
