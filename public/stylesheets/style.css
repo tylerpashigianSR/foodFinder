@@ -59,11 +59,11 @@ a {
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: white;
+    color: #ffffff;
 }
 
 .navbar-default .navbar-brand {
-    color: white;
+    color: #ffffff;
 }
 
 .emailHeader{
@@ -71,8 +71,13 @@ a {
   margin-top:0px;
   padding-top:115px;
   padding-bottom:15px;
+<<<<<<< HEAD
   /*background-color: #dd2c00;*/
   color:white;
+=======
+  background-color: #dd2c00;
+  color:#ffffff;
+>>>>>>> 24b867a2c5f32238bde86baa4a3ccf4ae1154a3e
 }
 
 .displayArea{
