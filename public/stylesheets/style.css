@@ -1,7 +1,6 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}*/
+body {
+  background-color: #eee;
+}
 
 a {
   color: #00B7FF;
@@ -43,6 +42,34 @@ a {
 
 .restaurants {
   padding-bottom: 2%;
+}
+
+.navbar{
+  background-color: #a30000;
+  border-radius: 0px;
+  border: none;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.emailHeader{
+  margin-bottom: 0px;
+  margin-top:0px;
+  padding-top:15px;
+  padding-bottom:15px;
+  background-color: #dd2c00;
+  color:white;
+}
+
+.displayArea{
+  margin-bottom:50px;
+
 }
 
 .emailGood:focus, .uneditable-input:focus {

@@ -84,3 +84,8 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        }
 
    });
+
+   foodFinder.controller('aboutController', function($scope, $http) {
+
+
+   });
