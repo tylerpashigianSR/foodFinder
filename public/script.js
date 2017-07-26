@@ -39,7 +39,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        }
 
        $scope.$watch(function() { return $scope.email; }, function (newVal, oldVal) {
-         
+
        });
 
        $scope.searchForPlaces = function(showMoreClicked){
@@ -86,5 +86,10 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
        init = function(){
          $scope.searchForPlaces(false);
        }
+
+   });
+
+   foodFinder.controller('aboutController', function($scope, $http) {
+
 
    });
