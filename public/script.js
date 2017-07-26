@@ -52,7 +52,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
          else{
            $scope.places = [];
            if($scope.keyword == null | $scope.keyword == ""){
-             url = "http://localhost:3000/places/" + $scope.max_price + "/" + $scope.email;
+             url = "http://localhost:3000/places/" + "null/" + $scope.max_price + "/" + $scope.email;
            }
            else{
              url = "http://localhost:3000/places/" + $scope.keyword + "/" + $scope.max_price + "/" + $scope.email;
