@@ -71,7 +71,14 @@ a {
 
 .displayArea{
   position: relative;
-  margin-bottom:50px;
+}
+
+.footer{
+  margin-top:50px;
+  background-color: rgba(211,211,211,.5);
+  padding:20px;
+  text-align: center;
+  color:grey;
 }
 
 .emailGood:focus, .uneditable-input:focus {
