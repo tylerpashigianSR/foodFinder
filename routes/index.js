@@ -4,20 +4,14 @@ var request = require('request');
 
 var chosenRestaurants = {};
 
-router.get('/places/:max_price/:email', function(req,res){
-  request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.8885,-87.6354&rankby=distance&type=restaurant&opennow=true&maxprice=" +
-            req.params.max_price + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ",
-   function(error, response, body) {
-     var results = processResults(body, req.params.email);
-     var next_page_token = JSON.parse(body).next_page_token;
-     res.send({results : results, next_page_token : next_page_token});
-  });
-});
-
 router.get('/places/:keyword/:max_price/:email', function(req,res){
-  request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.8885,-87.6354&rankby=distance&type=restaurant&opennow=true&maxprice=" +
-            req.params.max_price + "&keyword=" + req.params.keyword + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ",
-   function(error, response, body) {
+  var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.8885,-87.6354&rankby=distance&type=restaurant&opennow=true&maxprice=" +
+            req.params.max_price + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ";
+  if(req.params.keyword != "null"){
+    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=41.8885,-87.6354&rankby=distance&type=restaurant&opennow=true&maxprice=" +
+              req.params.max_price + "&keyword=" + req.params.keyword + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ";
+  }
+  request(url,function(error, response, body) {
      var results = processResults(body, req.params.email);
      var next_page_token = JSON.parse(body).next_page_token;
      res.send({results : results, next_page_token : next_page_token});

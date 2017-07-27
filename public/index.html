@@ -15,27 +15,28 @@
 </head>
 <body>
 
-    <!-- HEADER AND NAVBAR -->
     <header>
         <nav class="navbar navbar-default">
         <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">MunchMates</a>
+            <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="/"><i class="fa fa-home"></i> MunchMates</a>
             </div>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#about"><i class="fa fa-shield"></i> About</a></li>
-            </ul>
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand" href="#about"><i class="fa fa-shield"></i> About</a>
+            </div>
         </div>
         </nav>
     </header>
 
     <div id="main">
-        <!-- angular templating -->
-        <!-- this is where content will be injected -->
         <div ng-view></div>
-
     </div>
+
+    <footer class="footer">
+      <div class="container">
+        Made for SapientRazorfish
+      </div>
+    </footer>
 
     <script src="script.js"></script>
 
