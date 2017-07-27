@@ -15,14 +15,19 @@
   </div>
 </div>
 
+<div ng-show="finalResults.place != null && emailLockedIn">
+  {{finalResults.place}}
+  {{finalResults.emails}}
+</div>
+
 <div class="container displayArea" id="search">
-  <div class="row" ng-show="emailLockedIn">
+  <div class="row" ng-show="emailLockedIn && finalResults.place == null">
     <div class="col-md-3 col-xs-1"></div>
     <div class="col-md-6 col-xs-10">
       <h3>Search Restaurants</h3>
       <form ng-submit="searchForPlaces(false)" class="ng-pristine ng-valid">
         <div class="input-group">
-          <input type="text" ng-model="keyword" placeholder="Enter a keyword (ex. taco, burger)" class="form-control">
+          <input type="text" ng-model="keyword" placeholder="Enter a keyword (ex. taco, burger) for more results" class="form-control">
           <span>Max Price: </span>
           <label class="radio-inline"><input type="radio" value=1 name="optradio" ng-model="max_price">$</label>
           <label class="radio-inline"><input type="radio" value=2 name="optradio" ng-model="max_price">$$</label>
@@ -57,7 +62,8 @@
 
       <div ng-show="places.length">
         <div style="color:grey; text-align:center; margin-top:10px;">
-          Select as many restaurants as you like!
+          Select as many places as you like: </br>
+          when four people agree to the same place, your group is formed!
         </div>
         <ul class="list-group" style="max-height:500px; overflow-y:auto;">
           <li class="list-group-item" ng-repeat="place in places track by $index" style="backgroud-color:red;">
