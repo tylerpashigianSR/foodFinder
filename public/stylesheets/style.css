@@ -16,14 +16,9 @@ a {
   /*background-color: rgba(0,0,0,.5);*/
   height: 350px;
   width: 100%;
-  /*z-index: 2;*/
   /*background: #0575E6;  /* fallback for old browsers */
-  /*background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
-  /*background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.navbar {
-  margin-bottom: 0px;
+  /*background: -webkit-linear-gradient(to right, 169,169,169,.1, 169,169,169,1);  /* Chrome 10-25, Safari 5.1-6 */
+  /*background: linear-gradient(to right, 169,169,169,.1, 169,169,169,1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .fa-plus-square {
@@ -53,9 +48,12 @@ a {
 .navbar{
   position: absolute;
   width: 100%;
-  background-color: rgba(211,211,211,.5);
+  background-color: transparent;
+  background-color: rgba(211,211,211,.8);
+  /*border-bottom: 10px;*/
   border-radius: 0px;
   border: none;
+  margin-bottom: 0px;
 }
 
 .navbar-default .navbar-brand {

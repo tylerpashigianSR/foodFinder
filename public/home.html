@@ -2,8 +2,14 @@
   <h3>Your contact email:</h3>
   <div class="row">
     <form ng-submit="submitEmail();" style="display:flex;"  ng-show="!emailLockedIn" name="myForm" class="col-md-4 col-md-offset-4">
+      <div class="input-group">
       <input type="email" class="form-control" ng-class="{'emailBad': !email.length, 'emailGood': !myForm.$invalid || email.length}" placeholder="Enter your e-mail" ng-model="email">
-      <button class="btn" type="submit" ng-disabled="myForm.$invalid || !email.length">Confirm</button>
+      <span class="input-group-btn">
+        <button class="btn searchBtn" type="submit" ng-disabled="myForm.$invalid || !email.length">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+        </button>
+      </span>
+      </div>
     </form>
   </div>
 
