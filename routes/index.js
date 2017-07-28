@@ -22,7 +22,7 @@ router.get('/checkForGroup/:email', function(req,res){
       request("https://maps.googleapis.com/maps/api/place/details/json?placeid="
         + formedGroups[i].place_id + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ",
         function(error, response, body) {
-          res.send({place:response,emails:formedGroups[i].emails});
+          res.send({place:JSON.parse(response.body).result,emails:formedGroups[i].emails});
       });
       break;
     }
@@ -58,7 +58,7 @@ router.get('/morePlaces/:next_page_token/:email', function(req,res){
 
 router.get('/increaseCounter/:place_id/:email', function(req, res) {
   var groupFound = false;
-  if (chosenRestaurants[req.params.place_id] == null) {
+  if (chosenRestaurants[req.params.place_id] == null || chosenRestaurants[req.params.place_id] == []) {
     chosenRestaurants[req.params.place_id] = [req.params.email];
   }
   else {
@@ -67,7 +67,6 @@ router.get('/increaseCounter/:place_id/:email', function(req, res) {
       chosenRestaurants[req.params.place_id].push(req.params.email);
       //now check to see if a group has been filled
       if(chosenRestaurants[req.params.place_id].length >= groupMatchMinimum){
-
         groupFound = true;
         var emails = chosenRestaurants[req.params.place_id];
         chosenRestaurants[req.params.place_id] = [];
@@ -94,7 +93,7 @@ router.get('/increaseCounter/:place_id/:email', function(req, res) {
         request("https://maps.googleapis.com/maps/api/place/details/json?placeid="
           + req.params.place_id + "&key=AIzaSyCXyqmOpSzVX0R85aM-p7jEHKU1SPD1_TQ",
           function(error, response, body) {
-            res.send({place:response,emails:emails});
+            res.send({place:JSON.parse(response.body).result,emails:emails});
         });
       }
     }
@@ -121,7 +120,7 @@ function removeEmailsFromAllLists(emails){
     for(var i = 0; i < emails.length; i++){ //for each email to be removed
       var index = chosenRestaurants[key].indexOf(emails[i]);
       if(index >= 0){
-        chosenRestaurants[req.params.place_id].splice(index, 1);
+        chosenRestaurants[key].splice(index, 1);
       }
     }
   }

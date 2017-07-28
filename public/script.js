@@ -52,7 +52,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
                   $scope.searchForPlaces(false);
                 }
                 else{
-                  $scope.finalResults.place = JSON.parse(response.place.body).result;
+                  $scope.finalResults.place = response.place;
                   $scope.finalResults.emails = response.emails;
                   console.log($scope.finalResults);
                 }
@@ -90,7 +90,7 @@ var foodFinder = angular.module('foodFinder', ['ngRoute']);
                place.counter++;
                place.chosen = true;
                if(response.place != null){
-                 $scope.finalResults.place = JSON.parse(response.place.body).result;
+                 $scope.finalResults.place = response.place;
                  $scope.finalResults.emails = response.emails;
                  console.log($scope.finalResults);
                }
