@@ -100,7 +100,7 @@ router.get('/increaseCounter/:place_id/:email', function(req, res) {
     }
   }
   if(!groupFound){
-    res.send({place_id:null,emails:null});
+    res.send({place:null,emails:null});
   }
   console.log(chosenRestaurants);
 });
