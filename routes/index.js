@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
     pass: 'munchmates123'
   }
 });
-const groupMatchMinimum = 2;
+const groupMatchMinimum = 4;
 var chosenRestaurants = {};
 var formedGroups = []; //consist of lists of key:place_id, values: emails
 
