@@ -21,9 +21,33 @@
   </div>
 </div>
 
-<div ng-show="finalResults.place != null && emailLockedIn">
-  {{finalResults.place}}
-  {{finalResults.emails}}
+<div class="container" ng-show="finalResults.place != null && emailLockedIn">
+  <div class="row">
+    <div class="col-md-3 col-xs-1"></div>
+    <div class="col-md-6 col-xs-10">
+      <h3 style="text-align:center;">You've got a munch spot!</h3>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="{{finalResults.place.website}}"><h3>{{finalResults.place.name}}</h3></a></li>
+        <li class="list-group-item"><a href="{{finalResults.place.url}}"><h4>{{finalResults.place.vicinity}}</h4></a></li>
+        <li class="list-group-item">{{finalResults.place.formatted_phone_number}}</li>
+      </ul>
+      <h3 style="text-align:center;">Your mates today:</h3>
+      <ul class="list-group">
+        <li class="list-group-item" ng-if="mateEmail != email" ng-repeat="mateEmail in finalResults.emails">{{mateEmail}}</li>
+      </ul>
+      <div ng-if="finalResults.place.reviews.length">
+        <h4 style="text-align:center;">What people are saying:</h4>
+        <ul class="list-group" style="max-height:250px; overflow-y:auto;">
+          <li class="list-group-item" ng-repeat="review in finalResults.place.reviews">
+            <div>{{review.text}}</div>
+            <span style="color:grey;">{{review.rating}} stars</span>
+             |
+            <span style="color:grey;">{{review.relative_time_description}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="container displayArea" id="search">
